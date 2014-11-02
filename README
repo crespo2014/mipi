@@ -1,0 +1,20 @@
+CSI camera interface has control codes
+
+Start of line SOL  0xFF00:0000
+End of line EOL    0xFF00:0001
+Start of frame SOF 0xFF00:0002
+End of frame EOF   0xFF00:0003
+
+All codes starts with 8 ones and 16 zeros. There is not valid RGB pattern that start with this sequency
+
+Data is transmitte from LSB to MSB.
+That means two consecutives bytes where the MSB is all 1 and the next has LSB as 1 can produce a control code pattern
+
+Ex
+1111111 00000000 0000000 xxxxxx
+111111x 00000001 0000000 xxxxx0
+
+fixed 
+1111111 00000000 0000001 xxxxxx
+
+made the lsb always 0 will break this pattern or set a 1 on the lsb of 3th byte
